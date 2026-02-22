@@ -1,6 +1,10 @@
 {
     "rewrites": [
         {
+            "source": "/api/fd-proxy/:path*",
+            "destination": "/api/fd-proxy"
+        },
+        {
             "source": "/((?!api/).*)",
             "destination": "/index.html"
         }

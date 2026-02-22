@@ -776,47 +776,184 @@
 }
 
 /* ── RESPONSIVE ──────────────────────────────────────────── */
+
+/* Tablet: 2-column grid */
 @media (max-width: 1024px) {
     .livepage-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
+/* Tablet-ish: controls start to get tight */
 @media (max-width: 768px) {
+
+    /* Hero */
+    .livepage-hero {
+        padding: calc(var(--nav-height) + var(--space-10)) 0 var(--space-6);
+    }
+
+    .livepage-hero__sub {
+        font-size: 0.82rem;
+    }
+
+    /* Controls: stack status tabs above league scroll */
     .livepage-controls__inner {
+        flex-wrap: wrap;
         gap: var(--space-2);
+    }
+
+    .livepage-status-tabs {
+        order: 1;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        padding-bottom: 2px;
+    }
+
+    .livepage-status-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .livepage-league-scroll {
+        order: 2;
+        flex: 1;
+    }
+
+    .livepage-refresh {
+        order: 3;
+        margin-left: auto;
     }
 
     .livepage-status-tab {
         padding: 6px 10px;
         font-size: 0.72rem;
+        flex-shrink: 0;
     }
 }
 
+/* Mobile: single column, larger touch targets */
 @media (max-width: 580px) {
+
+    /* Hero */
+    .livepage-hero {
+        padding: calc(var(--nav-height) + var(--space-8)) 0 var(--space-4);
+    }
+
+    .livepage-hero__title {
+        font-size: clamp(2rem, 10vw, 3.2rem);
+        line-height: 1;
+    }
+
+    .livepage-hero__sub {
+        font-size: 0.8rem;
+    }
+
+    .livepage-hero__badge {
+        font-size: 0.62rem;
+        padding: 4px 10px;
+    }
+
+    /* Score ticker — hide on very tight screens */
+    .score-ticker__label span:last-child {
+        display: none;
+    }
+
+    /* Controls */
+    .livepage-controls {
+        padding: var(--space-2) 0;
+    }
+
+    /* 2-column card grid on medium phones */
     .livepage-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-3);
+    }
+
+    /* Cards — slightly smaller internals */
+    .mc__match {
+        grid-template-columns: 1fr 60px 1fr;
+        padding: 10px 6px;
+        gap: 2px;
     }
 
     .mc__score {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
 
-    .mc__crest {
+    .mc__crest,
+    .mc__crest-wrap {
         width: 32px;
         height: 32px;
         max-width: 32px;
         max-height: 32px;
     }
 
-    .mc__crest-wrap {
-        width: 32px;
-        height: 32px;
+    .mc__name {
+        font-size: 0.65rem;
+    }
+
+    .mc__watch-btn {
+        font-size: 0.72rem;
+        padding: 7px 12px;
+    }
+
+    /* Group title */
+    .livepage-group__title {
+        font-size: 1rem;
+    }
+
+    /* Pagination — tighten */
+    .livepage-page-btn {
+        padding: 8px 12px;
+        font-size: 0.75rem;
+    }
+
+    .livepage-page-num,
+    .livepage-page-ellipsis {
+        width: 30px;
+        height: 30px;
+        font-size: 0.76rem;
     }
 }
 
-@media (max-width: 420px) {
+/* Small phones: 1-column */
+@media (max-width: 400px) {
     .livepage-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Card fills width — bigger score/crests look better */
+    .mc__match {
+        grid-template-columns: 1fr 72px 1fr;
+        padding: 14px 12px;
+    }
+
+    .mc__score {
+        font-size: 2rem;
+    }
+
+    .mc__crest,
+    .mc__crest-wrap {
+        width: 40px;
+        height: 40px;
+        max-width: 40px;
+        max-height: 40px;
+    }
+
+    .mc__name {
+        font-size: 0.75rem;
+    }
+
+    /* Status tabs: icon + short label only */
+    .livepage-status-tab {
+        padding: 6px 8px;
+        font-size: 0.68rem;
+    }
+
+    /* Pagination keeps Prev/Next, hides page numbers if needed */
+    .livepage-page-numbers {
+        display: none;
     }
 }
