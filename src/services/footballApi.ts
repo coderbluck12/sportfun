@@ -23,7 +23,11 @@
 // Docs: https://www.football-data.org/documentation/quickstart
 // ============================================================
 
-const BASE_URL = '/fd-api/v4'
+// In dev: use the Vite proxy → avoids CORS during local development
+// In prod: use the Vercel serverless function → actual server-side proxy
+const BASE_URL = import.meta.env.DEV
+    ? '/fd-api/v4'        // Vite dev proxy  (vite.config.ts)
+    : '/api/fd-proxy/v4'  // Vercel function (api/fd-proxy.ts)
 
 function getHeaders(token: string): Record<string, string> {
     return { 'X-Auth-Token': token }
