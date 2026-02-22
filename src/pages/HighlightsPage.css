@@ -1,0 +1,210 @@
+/* Hero */
+.hpage__hero {
+    position: relative;
+    padding: calc(var(--nav-height) + var(--space-20)) 0 var(--space-16);
+    overflow: hidden;
+}
+
+.hpage__hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 100%, rgba(0, 255, 135, 0.06) 0%, transparent 70%);
+}
+
+.hpage__hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.hpage__title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    letter-spacing: 0.03em;
+    color: var(--color-white);
+    margin-bottom: var(--space-3);
+}
+
+.hpage__subtitle {
+    font-size: 1rem;
+    color: var(--color-gray-300);
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* Controls */
+.hpage__controls {
+    position: sticky;
+    top: var(--nav-height);
+    z-index: 100;
+    background: rgba(8, 11, 15, 0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-4) 0;
+}
+
+.hpage__controls-inner {
+    display: flex;
+    gap: var(--space-4);
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Search */
+.hpage__search {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+}
+
+.hpage__search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-gray-500);
+    pointer-events: none;
+}
+
+.hpage__search-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    padding: 10px 16px 10px 40px;
+    font-size: 0.85rem;
+    color: var(--color-white);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.hpage__search-input::placeholder {
+    color: var(--color-gray-500);
+}
+
+.hpage__search-input:focus {
+    border-color: var(--color-green);
+    box-shadow: 0 0 0 3px rgba(0, 255, 135, 0.1);
+}
+
+/* Filters */
+.hpage__filters {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+}
+
+.hpage__filter-btn {
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--color-gray-300);
+    border: 1px solid var(--color-border);
+    transition: all var(--transition-fast);
+}
+
+.hpage__filter-btn:hover {
+    background: rgba(0, 255, 135, 0.08);
+    color: var(--color-green);
+    border-color: rgba(0, 255, 135, 0.3);
+}
+
+.hpage__filter-btn.active {
+    background: var(--color-green);
+    color: var(--color-bg);
+    border-color: var(--color-green);
+}
+
+/* Sort */
+.hpage__sort {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-gray-500);
+    font-size: 0.8rem;
+}
+
+.hpage__sort-select {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    padding: 8px 14px;
+    font-size: 0.78rem;
+    color: var(--color-white);
+    font-family: var(--font-body);
+    cursor: pointer;
+}
+
+/* Results */
+.hpage__results {
+    padding: var(--space-10) 0 var(--space-24);
+}
+
+.hpage__results-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+}
+
+.hpage__count {
+    font-size: 0.82rem;
+    color: var(--color-gray-500);
+}
+
+.hpage__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+}
+
+/* Empty State */
+.hpage__empty {
+    text-align: center;
+    padding: var(--space-20) 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.hpage__empty-icon {
+    font-size: 3rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.hpage__empty h3 {
+    font-size: 1.1rem;
+    color: var(--color-white);
+}
+
+.hpage__empty p {
+    font-size: 0.85rem;
+    color: var(--color-gray-500);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .hpage__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .hpage__controls-inner {
+        gap: var(--space-3);
+    }
+}
+
+@media (max-width: 560px) {
+    .hpage__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hpage__filters {
+        display: none;
+    }
+}

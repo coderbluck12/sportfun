@@ -1,0 +1,223 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: var(--nav-height);
+    transition: background var(--transition-base), box-shadow var(--transition-base), backdrop-filter var(--transition-base);
+}
+
+.navbar--scrolled {
+    background: rgba(8, 11, 15, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 1px 0 var(--color-border), 0 4px 32px rgba(0, 0, 0, 0.5);
+}
+
+.navbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--nav-height);
+}
+
+/* Logo */
+.navbar__logo {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    letter-spacing: 0.04em;
+    position: relative;
+}
+
+.navbar__logo-sport {
+    color: var(--color-white);
+}
+
+.navbar__logo-fun {
+    color: var(--color-green);
+}
+
+.navbar__logo-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--color-green);
+    border-radius: 50%;
+    align-self: flex-end;
+    margin-bottom: 6px;
+    animation: pulse-green 2s ease-in-out infinite;
+}
+
+/* Desktop links */
+.navbar__links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+}
+
+.navbar__link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-gray-300);
+    letter-spacing: 0.03em;
+    transition: color var(--transition-fast);
+    position: relative;
+    padding-bottom: 2px;
+}
+
+.navbar__link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-green);
+    border-radius: 2px;
+    transform: scaleX(0);
+    transition: transform var(--transition-base);
+}
+
+.navbar__link:hover,
+.navbar__link.active {
+    color: var(--color-white);
+}
+
+.navbar__link.active::after,
+.navbar__link:hover::after {
+    transform: scaleX(1);
+}
+
+/* Live link special style */
+.navbar__link--live {
+    color: var(--color-accent) !important;
+    font-weight: 600;
+}
+
+.navbar__link--live::after {
+    background: var(--color-accent) !important;
+}
+
+.navbar__mobile-link--live {
+    color: var(--color-accent) !important;
+}
+
+/* Socials */
+.navbar__socials {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.navbar__social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--color-gray-300);
+    transition: all var(--transition-fast);
+    border: 1px solid transparent;
+}
+
+.navbar__social-icon:hover {
+    background: rgba(0, 255, 135, 0.1);
+    color: var(--color-green);
+    border-color: rgba(0, 255, 135, 0.3);
+    transform: translateY(-2px);
+}
+
+.navbar__social-icon--snap:hover {
+    background: rgba(255, 252, 0, 0.1);
+    color: #fffc00;
+    border-color: rgba(255, 252, 0, 0.3);
+}
+
+.navbar__social-icon--yt:hover {
+    background: rgba(255, 0, 0, 0.1);
+    color: #ff0000;
+    border-color: rgba(255, 0, 0, 0.3);
+}
+
+.navbar__cta {
+    margin-left: var(--space-2);
+    padding: 10px 20px;
+    font-size: 0.82rem;
+}
+
+/* Hamburger */
+.navbar__hamburger {
+    display: none;
+    background: none;
+    color: var(--color-white);
+    padding: var(--space-2);
+}
+
+/* Mobile Menu */
+.navbar__mobile {
+    display: none;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-4) var(--space-6) var(--space-8);
+    background: rgba(8, 11, 15, 0.97);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--color-border);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all var(--transition-base);
+    pointer-events: none;
+}
+
+.navbar__mobile.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+.navbar__mobile-link {
+    padding: var(--space-4) 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--color-gray-300);
+    border-bottom: 1px solid var(--color-border);
+    transition: color var(--transition-fast);
+}
+
+.navbar__mobile-link.active,
+.navbar__mobile-link:hover {
+    color: var(--color-green);
+}
+
+.navbar__mobile-socials {
+    display: flex;
+    gap: var(--space-3);
+    padding: var(--space-5) 0;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .navbar__links {
+        display: none;
+    }
+
+    .navbar__cta {
+        display: none;
+    }
+
+    .navbar__socials {
+        display: none;
+    }
+
+    .navbar__hamburger {
+        display: flex;
+    }
+
+    .navbar__mobile {
+        display: flex;
+    }
+}

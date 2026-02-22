@@ -1,0 +1,214 @@
+.footer {
+    background: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-20) 0 var(--space-8);
+    position: relative;
+    overflow: hidden;
+}
+
+.footer__glow {
+    position: absolute;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 300px;
+    background: radial-gradient(ellipse, rgba(0, 255, 135, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.footer__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: var(--space-12);
+    margin-bottom: var(--space-12);
+}
+
+/* Brand */
+.footer__logo {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    letter-spacing: 0.04em;
+    color: var(--color-white);
+    display: inline-block;
+    margin-bottom: var(--space-4);
+}
+
+.footer__logo--green {
+    color: var(--color-green);
+}
+
+.footer__tagline {
+    font-size: 0.85rem;
+    color: var(--color-gray-300);
+    line-height: 1.7;
+    margin-bottom: var(--space-6);
+    max-width: 280px;
+}
+
+.footer__socials {
+    display: flex;
+    gap: var(--space-3);
+}
+
+.footer__social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--color-border);
+    color: var(--color-gray-300);
+    transition: all var(--transition-fast);
+}
+
+.footer__social:hover {
+    background: var(--color-green-glow);
+    color: var(--color-green);
+    border-color: rgba(0, 255, 135, 0.3);
+    transform: translateY(-2px);
+}
+
+.footer__social--snap:hover {
+    background: rgba(255, 252, 0, 0.1);
+    color: #fffc00;
+    border-color: rgba(255, 252, 0, 0.3);
+}
+
+.footer__social--yt:hover {
+    background: rgba(255, 0, 0, 0.1);
+    color: #ff0000;
+    border-color: rgba(255, 0, 0, 0.3);
+}
+
+/* Columns */
+.footer__col-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-white);
+    margin-bottom: var(--space-5);
+}
+
+.footer__links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.footer__links a {
+    font-size: 0.85rem;
+    color: var(--color-gray-300);
+    transition: color var(--transition-fast);
+}
+
+.footer__links a:hover {
+    color: var(--color-green);
+}
+
+/* Newsletter */
+.footer__newsletter-text {
+    font-size: 0.83rem;
+    color: var(--color-gray-300);
+    margin-bottom: var(--space-4);
+    line-height: 1.6;
+}
+
+.footer__subscribe {
+    display: flex;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+}
+
+.footer__email-input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    padding: 10px 16px;
+    font-size: 0.82rem;
+    color: var(--color-white);
+    transition: border-color var(--transition-fast);
+}
+
+.footer__email-input::placeholder {
+    color: var(--color-gray-500);
+}
+
+.footer__email-input:focus {
+    border-color: var(--color-green);
+    box-shadow: 0 0 0 3px rgba(0, 255, 135, 0.1);
+}
+
+.footer__subscribe-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background: var(--color-green);
+    color: var(--color-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all var(--transition-fast);
+}
+
+.footer__subscribe-btn:hover {
+    background: var(--color-green-dim);
+    transform: scale(1.05);
+}
+
+.footer__contact {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 0.8rem;
+    color: var(--color-gray-300);
+}
+
+.footer__contact a {
+    color: var(--color-gray-300);
+    transition: color var(--transition-fast);
+}
+
+.footer__contact a:hover {
+    color: var(--color-green);
+}
+
+/* Bottom */
+.footer__bottom {
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-6);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer__copy,
+.footer__made {
+    font-size: 0.78rem;
+    color: var(--color-gray-500);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .footer__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-8);
+    }
+}
+
+@media (max-width: 560px) {
+    .footer__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer__bottom {
+        flex-direction: column;
+        gap: var(--space-3);
+        text-align: center;
+    }
+}

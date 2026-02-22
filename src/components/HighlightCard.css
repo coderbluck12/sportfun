@@ -1,0 +1,159 @@
+.hcard {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+    animation: fadeInUp 0.4s ease both;
+}
+
+.hcard:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(0, 255, 135, 0.3);
+}
+
+/* Large variant */
+.hcard--large .hcard__thumb {
+    aspect-ratio: 16/9;
+}
+
+.hcard--large .hcard__title {
+    font-size: 1.1rem;
+}
+
+/* Thumbnail */
+.hcard__thumb {
+    position: relative;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+}
+
+.hcard__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.hcard:hover .hcard__thumb img {
+    transform: scale(1.06);
+}
+
+/* Overlay */
+.hcard__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.hcard:hover .hcard__overlay {
+    opacity: 1;
+}
+
+.hcard__play {
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-full);
+    background: var(--color-green);
+    color: var(--color-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0.8);
+    transition: transform var(--transition-base);
+    box-shadow: 0 0 30px rgba(0, 255, 135, 0.5);
+}
+
+.hcard:hover .hcard__play {
+    transform: scale(1);
+}
+
+/* Duration */
+.hcard__duration {
+    position: absolute;
+    bottom: var(--space-3);
+    right: var(--space-3);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    color: var(--color-white);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: var(--radius-full);
+}
+
+/* Badges */
+.hcard__badges {
+    position: absolute;
+    top: var(--space-3);
+    left: var(--space-3);
+    display: flex;
+    gap: var(--space-1);
+    flex-wrap: wrap;
+}
+
+/* Info */
+.hcard__info {
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.hcard__teams {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--color-green);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.hcard__title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--color-white);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.hcard__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--space-1);
+}
+
+.hcard__score {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    color: var(--color-white);
+}
+
+.hcard__stats {
+    display: flex;
+    gap: var(--space-4);
+    align-items: center;
+    font-size: 0.72rem;
+    color: var(--color-gray-500);
+}
+
+.hcard__stats span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
