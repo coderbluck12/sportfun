@@ -1,5 +1,5 @@
 // api/stream-urls.ts  — Vercel serverless function
-// Stores stream URL mappings in Upstash Redis so ALL users see them.
+// Stores stream URL mappings in Vercel KV (via REST API) so ALL users see them.
 //
 // GET  /api/stream-urls          → { urls: Record<string, string> }
 // POST /api/stream-urls          → body { id, url } → saves to Redis
@@ -9,8 +9,8 @@
 
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 
-const REDIS_URL = process.env.UPSTASH_REDIS_REST_URL ?? ''
-const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN ?? ''
+const REDIS_URL = process.env.KV_REST_API_URL ?? ''
+const REDIS_TOKEN = process.env.KV_REST_API_TOKEN ?? ''
 const KV_KEY = 'sf:stream_urls'
 const ADMIN_SECRET = process.env.ADMIN_SECRET ?? 'sportfun2026'
 
