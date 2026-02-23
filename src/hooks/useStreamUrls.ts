@@ -94,20 +94,11 @@ export function useStreamUrls() {
         setUrls({})
         saveCache({})
 
-        // Clear each key — we POST an empty object by deleting all keys one by one
-        // Simple approach: just set empty via a loop on current keys
-        fetch(API_ENDPOINT)
-            .then(r => r.json())
-            .then(async (data: { urls?: StreamUrlMap }) => {
-                const keys = Object.keys(data.urls ?? {})
-                await Promise.all(keys.map(id =>
-                    fetch(`${API_ENDPOINT}?id=${encodeURIComponent(id)}`, {
-                        method: 'DELETE',
-                        headers: { 'x-admin-secret': ADMIN_SECRET },
-                    })
-                ))
-            })
-            .catch(console.error)
+        // Single request wipes everything at once
+        fetch(`${API_ENDPOINT}?action=clear`, {
+            method: 'DELETE',
+            headers: { 'x-admin-secret': ADMIN_SECRET },
+        }).catch(console.error)
     }, [])
 
     return { urls, getUrl, setUrl, removeUrl, clearAll }
