@@ -93,7 +93,6 @@ export default function MatchPage() {
     const league = getLeagueMeta(match.competition.code)
     const live = isLive(match)
     const upcoming = isUpcoming(match)
-    const finished = !live && !upcoming
     const homeScore = match.score.fullTime.home
     const awayScore = match.score.fullTime.away
     const stLabel = statusLabel(match)
