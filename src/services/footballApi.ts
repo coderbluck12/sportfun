@@ -209,3 +209,73 @@ export const LEAGUE_META: Record<string, LeagueMeta> = {
 export function getLeagueMeta(code: string): LeagueMeta {
     return LEAGUE_META[code] ?? { code, name: code, color: '#888', logo: '⚽' }
 }
+
+// ── Extended types for single-match endpoint ───────────────────
+
+export interface FDGoal {
+    minute: number
+    injuryTime?: number | null
+    type: 'NORMAL' | 'OWN' | 'PENALTY' | string
+    team: { id: number; name: string }
+    scorer: { id: number; name: string } | null
+    assist: { id: number; name: string } | null
+}
+
+export interface FDBooking {
+    minute: number
+    team: { id: number; name: string }
+    player: { id: number; name: string }
+    card: 'YELLOW_CARD' | 'YELLOW_RED_CARD' | 'RED_CARD'
+}
+
+export interface FDSubstitution {
+    minute: number
+    team: { id: number; name: string }
+    playerOut: { id: number; name: string }
+    playerIn: { id: number; name: string }
+}
+
+export interface FDLineupPlayer {
+    id: number
+    name: string
+    position: string
+    shirtNumber: number
+}
+
+export interface FDLineup {
+    id: number
+    name: string
+    formation: string | null
+    startXI: Array<{ player: FDLineupPlayer }>
+    bench: Array<{ player: FDLineupPlayer }>
+}
+
+export interface FDMatchDetail extends FDMatch {
+    goals: FDGoal[]
+    bookings: FDBooking[]
+    substitutions: FDSubstitution[]
+    lineups: FDLineup[]
+}
+
+export interface FDH2HResponse {
+    matches: FDMatch[]
+    resultSet: { count: number; competitions: string }
+    aggregates: {
+        numberOfMatches: number
+        totalGoals: number
+        homeTeam: { id: number; name: string; wins: number; draws: number; losses: number }
+        awayTeam: { id: number; name: string; wins: number; draws: number; losses: number }
+    }
+}
+
+// ── Single match + H2H API calls ──────────────────────────────
+
+/** GET /v4/matches/{id} — full detail: events, lineups, referees */
+export async function getMatchById(token: string, matchId: string | number): Promise<FDMatchDetail> {
+    return apiFetch<FDMatchDetail>(`/matches/${matchId}`, token)
+}
+
+/** GET /v4/matches/{id}/head2head — last N meetings between the two teams */
+export async function getMatchH2H(token: string, matchId: string | number, limit = 10): Promise<FDH2HResponse> {
+    return apiFetch<FDH2HResponse>(`/matches/${matchId}/head2head?limit=${limit}`, token)
+}

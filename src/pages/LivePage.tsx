@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import { Radio, Clock, CheckCircle2, RefreshCw, AlertCircle, Wifi, ChevronLeft, ChevronRight, ExternalLink, Play } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import StreamPlayer from '../components/StreamPlayer'
 import { useStreamUrls } from '../hooks/useStreamUrls'
 import {
@@ -430,6 +431,7 @@ function MatchGroup({ title, count, live, children }: {
 
 // ── Match Card ─────────────────────────────────────────────────
 function MatchCard({ card, onWatch }: { card: LiveMatchData; onWatch: () => void }) {
+    const navigate = useNavigate()
     const hasStream = !!card.streamUrl
     const isLiveCard = card.status === 'LIVE'
     const isDirectStream = isDirectHls(card.streamUrl)
@@ -449,52 +451,61 @@ function MatchCard({ card, onWatch }: { card: LiveMatchData; onWatch: () => void
                 </span>
             </div>
 
-            {/* Score area */}
-            <div className="mc__match">
-                {/* Home */}
-                <div className="mc__team mc__team--home">
-                    <div className="mc__crest-wrap">
-                        {card.homeLogo
-                            ? <img src={card.homeLogo} alt={card.homeName} className="mc__crest" />
-                            : <span className="mc__crest-fallback">🏟</span>
-                        }
-                    </div>
-                    <span className="mc__name" title={card.homeName}>{card.homeShortName}</span>
-                </div>
-
-                {/* Score / VS */}
-                <div className="mc__center">
-                    {card.status === 'UPCOMING' ? (
-                        <div className="mc__vs">VS</div>
-                    ) : (
-                        <div className="mc__score">
-                            <span className={card.homeScore !== null && card.awayScore !== null && card.homeScore > card.awayScore ? 'mc__score-win' : ''}>
-                                {card.homeScore ?? 0}
-                            </span>
-                            <span className="mc__score-dash">:</span>
-                            <span className={card.homeScore !== null && card.awayScore !== null && card.awayScore > card.homeScore ? 'mc__score-win' : ''}>
-                                {card.awayScore ?? 0}
-                            </span>
+            {/* Clickable body → match detail page */}
+            <div
+                className="mc__body"
+                onClick={() => navigate(`/match/${card.fixtureId}`)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={e => e.key === 'Enter' && navigate(`/match/${card.fixtureId}`)}
+                aria-label={`View ${card.homeName} vs ${card.awayName} details`}
+            >
+                <div className="mc__match">
+                    {/* Home */}
+                    <div className="mc__team mc__team--home">
+                        <div className="mc__crest-wrap">
+                            {card.homeLogo
+                                ? <img src={card.homeLogo} alt={card.homeName} className="mc__crest" />
+                                : <span className="mc__crest-fallback">🏟</span>
+                            }
                         </div>
-                    )}
-                    {card.venue && (
-                        <div className="mc__venue" title={card.venue}>
-                            {card.venue.length > 22 ? card.venue.slice(0, 22) + '\u2026' : card.venue}
-                        </div>
-                    )}
-                </div>
-
-                {/* Away */}
-                <div className="mc__team mc__team--away">
-                    <div className="mc__crest-wrap">
-                        {card.awayLogo
-                            ? <img src={card.awayLogo} alt={card.awayName} className="mc__crest" />
-                            : <span className="mc__crest-fallback">🏟</span>
-                        }
+                        <span className="mc__name" title={card.homeName}>{card.homeShortName}</span>
                     </div>
-                    <span className="mc__name" title={card.awayName}>{card.awayShortName}</span>
-                </div>
-            </div>
+
+                    {/* Score / VS */}
+                    <div className="mc__center">
+                        {card.status === 'UPCOMING' ? (
+                            <div className="mc__vs">VS</div>
+                        ) : (
+                            <div className="mc__score">
+                                <span className={card.homeScore !== null && card.awayScore !== null && card.homeScore > card.awayScore ? 'mc__score-win' : ''}>
+                                    {card.homeScore ?? 0}
+                                </span>
+                                <span className="mc__score-dash">:</span>
+                                <span className={card.homeScore !== null && card.awayScore !== null && card.awayScore > card.homeScore ? 'mc__score-win' : ''}>
+                                    {card.awayScore ?? 0}
+                                </span>
+                            </div>
+                        )}
+                        {card.venue && (
+                            <div className="mc__venue" title={card.venue}>
+                                {card.venue.length > 22 ? card.venue.slice(0, 22) + '\u2026' : card.venue}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Away */}
+                    <div className="mc__team mc__team--away">
+                        <div className="mc__crest-wrap">
+                            {card.awayLogo
+                                ? <img src={card.awayLogo} alt={card.awayName} className="mc__crest" />
+                                : <span className="mc__crest-fallback">🏟</span>
+                            }
+                        </div>
+                        <span className="mc__name" title={card.awayName}>{card.awayShortName}</span>
+                    </div>
+                </div>{/* end mc__match */}
+            </div>{/* end mc__body */}
 
             {/* Watch button */}
             <div className="mc__footer">

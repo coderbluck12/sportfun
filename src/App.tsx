@@ -7,6 +7,7 @@ import LivePage from './pages/LivePage'
 import AboutPage from './pages/AboutPage'
 import ContactPage from './pages/ContactPage'
 import AdminPage from './pages/AdminPage'
+import MatchPage from './pages/MatchPage'
 import './App.css'
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/match/:id" element={<MatchPage />} />
         </Routes>
       </main>
       <Footer />
