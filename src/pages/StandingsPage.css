@@ -1,0 +1,576 @@
+/* ============================================================
+   StandingsPage — sp-* namespace
+   ============================================================ */
+
+/* ── Page wrapper ─────────────────────────────────────── */
+.sp-page {
+    min-height: 100vh;
+    background: var(--color-bg);
+}
+
+/* ── Hero ─────────────────────────────────────────────── */
+.sp-hero {
+    position: relative;
+    padding: calc(var(--nav-height) + 56px) 0 52px;
+    overflow: hidden;
+    background: linear-gradient(160deg, #060d18 0%, var(--color-bg) 100%);
+}
+
+.sp-hero__glow {
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(ellipse at center, rgba(0, 255, 135, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.sp-hero__content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    animation: fadeInUp 0.6s ease both;
+}
+
+.sp-hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-green);
+    background: rgba(0, 255, 135, 0.08);
+    border: 1px solid rgba(0, 255, 135, 0.2);
+    border-radius: var(--radius-full);
+    padding: 5px 14px;
+    margin-bottom: var(--space-5);
+}
+
+.sp-hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    letter-spacing: 0.04em;
+    line-height: 1.05;
+    color: var(--color-white);
+    margin-bottom: var(--space-4);
+}
+
+.sp-hero__accent {
+    color: var(--color-green);
+}
+
+.sp-hero__sub {
+    font-size: 0.9rem;
+    color: var(--color-gray-300);
+    letter-spacing: 0.03em;
+}
+
+/* ── Tabs bar ──────────────────────────────────────────── */
+.sp-tabs-bar {
+    position: sticky;
+    top: var(--nav-height);
+    z-index: 40;
+    background: rgba(8, 11, 15, 0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.sp-tabs-bar__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding-top: 12px;
+    padding-bottom: 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.sp-tabs-bar__inner::-webkit-scrollbar {
+    display: none;
+}
+
+.sp-tabs {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex: 1;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.sp-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.sp-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 18px;
+    border-radius: var(--radius-full);
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-gray-300);
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.sp-tab:hover {
+    border-color: var(--tab-color, var(--color-green));
+    color: var(--color-white);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.sp-tab--active {
+    background: var(--tab-color, var(--color-green));
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.sp-tab__logo {
+    font-size: 1rem;
+}
+
+.sp-tab__name {
+    font-size: 0.78rem;
+}
+
+/* Refresh button */
+.sp-refresh {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--color-border);
+    color: var(--color-gray-300);
+    transition: all var(--transition-fast);
+}
+
+.sp-refresh:hover:not(:disabled) {
+    border-color: var(--color-green);
+    color: var(--color-green);
+}
+
+.sp-refresh:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* ── Table section ────────────────────────────────────── */
+.sp-table-section {
+    padding: var(--space-10) 0 var(--space-20);
+}
+
+/* Season header ──────────────────────────────────────── */
+.sp-season-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-5);
+    animation: fadeIn 0.4s ease both;
+}
+
+.sp-season-header__logo {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.sp-season-header__league {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 0.04em;
+    color: var(--color-white);
+}
+
+.sp-season-header__season {
+    font-size: 0.8rem;
+    color: var(--color-gray-300);
+    margin-top: 2px;
+}
+
+/* Legend ─────────────────────────────────────────────── */
+.sp-legend {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    margin-bottom: var(--space-5);
+    flex-wrap: wrap;
+}
+
+.sp-legend__item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.75rem;
+    color: var(--color-gray-300);
+}
+
+.sp-legend__item::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.sp-legend__item--ucl::before {
+    background: #1a56f0;
+}
+
+.sp-legend__item--uel::before {
+    background: #f05c1a;
+}
+
+.sp-legend__item--rel::before {
+    background: var(--color-accent);
+}
+
+/* Table wrapper ──────────────────────────────────────── */
+.sp-table-wrap {
+    overflow-x: auto;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    animation: fadeIn 0.4s ease both;
+}
+
+.sp-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 680px;
+}
+
+/* Header */
+thead tr {
+    background: var(--color-bg-card-2);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.sp-th {
+    padding: 11px 12px;
+    text-align: left;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-gray-500);
+    white-space: nowrap;
+}
+
+.sp-th--pos {
+    width: 36px;
+    text-align: center;
+    padding-left: 18px;
+}
+
+.sp-th--num {
+    width: 38px;
+    text-align: center;
+}
+
+.sp-th--pts {
+    width: 42px;
+    text-align: center;
+    color: var(--color-white);
+}
+
+.sp-th--form {
+    width: 90px;
+}
+
+/* Body rows */
+.sp-tr {
+    border-bottom: 1px solid rgba(30, 45, 61, 0.6);
+    transition: background var(--transition-fast);
+}
+
+.sp-tr:last-child {
+    border-bottom: none;
+}
+
+.sp-tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* Zone accent rows */
+.sp-tr--ucl {
+    background: rgba(26, 86, 240, 0.04);
+}
+
+.sp-tr--uel {
+    background: rgba(240, 92, 26, 0.04);
+}
+
+.sp-tr--rel {
+    background: rgba(255, 71, 87, 0.04);
+}
+
+.sp-td {
+    padding: 12px 12px;
+    font-size: 0.85rem;
+    color: var(--color-gray-100);
+    vertical-align: middle;
+}
+
+.sp-td--pos {
+    position: relative;
+    text-align: center;
+    font-weight: 700;
+    color: var(--color-white);
+    padding-left: 18px;
+    font-size: 0.8rem;
+}
+
+/* Zone left bar */
+.sp-zone-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+}
+
+.sp-zone-bar--ucl {
+    background: #1a56f0;
+}
+
+.sp-zone-bar--uel {
+    background: #f05c1a;
+}
+
+.sp-zone-bar--rel {
+    background: var(--color-accent);
+}
+
+.sp-td--team {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-width: 160px;
+}
+
+.sp-crest {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.sp-crest-fallback {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.sp-team-name {
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: var(--color-white);
+}
+
+.sp-team-name--short {
+    display: none;
+}
+
+.sp-td--num {
+    text-align: center;
+    color: var(--color-gray-300);
+    font-size: 0.83rem;
+}
+
+.sp-td--w {
+    color: #4ade80;
+}
+
+.sp-td--l {
+    color: var(--color-accent);
+}
+
+.sp-td--gd {
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.83rem;
+}
+
+.sp-td--gd.pos {
+    color: #4ade80;
+}
+
+.sp-td--gd.neg {
+    color: var(--color-accent);
+}
+
+.sp-td--pts {
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--color-white);
+}
+
+/* Form dots */
+.sp-form {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.sp-form__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.sp-form__dot--w {
+    background: #4ade80;
+}
+
+.sp-form__dot--d {
+    background: var(--color-gray-500);
+}
+
+.sp-form__dot--l {
+    background: var(--color-accent);
+}
+
+/* ── Skeleton ─────────────────────────────────────────── */
+.sp-skeleton {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+}
+
+.sp-skeleton__row {
+    height: 52px;
+    background: linear-gradient(90deg,
+            var(--color-bg-card) 25%,
+            var(--color-bg-card-2) 50%,
+            var(--color-bg-card) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.sp-skeleton__row:last-child {
+    border-bottom: none;
+}
+
+/* ── Groups (UCL) ─────────────────────────────────────── */
+.sp-groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(560px, 1fr));
+    gap: var(--space-8);
+}
+
+.sp-group__title {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    letter-spacing: 0.06em;
+    color: var(--color-white);
+    margin-bottom: var(--space-4);
+}
+
+/* ── State messages ───────────────────────────────────── */
+.sp-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+    text-align: center;
+    padding: var(--space-20) var(--space-6);
+    color: var(--color-gray-300);
+}
+
+.sp-state h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 0.04em;
+    color: var(--color-white);
+}
+
+.sp-state p {
+    font-size: 0.9rem;
+    max-width: 360px;
+}
+
+.sp-state--warn {
+    color: var(--color-gold);
+}
+
+.sp-state--warn h3 {
+    color: var(--color-gold);
+}
+
+.sp-state--error {
+    color: var(--color-accent);
+}
+
+.sp-state--error h3 {
+    color: var(--color-accent);
+}
+
+/* spin for refresh icon */
+.spin-refresh {
+    animation: spin 0.8s linear infinite;
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 768px) {
+    .sp-tab__name {
+        display: none;
+    }
+
+    .sp-tab {
+        padding: 8px 12px;
+    }
+
+    .sp-tab__logo {
+        font-size: 1.2rem;
+    }
+
+    .sp-th--form,
+    .sp-td--form {
+        display: none;
+    }
+
+    .sp-team-name--full {
+        display: none;
+    }
+
+    .sp-team-name--short {
+        display: inline;
+    }
+
+    .sp-groups {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .sp-th--gd,
+    .sp-td--gd,
+    .sp-th[title="Goals For"],
+    .sp-th[title="Goals Against"] {
+        display: none;
+    }
+
+    .sp-td:nth-child(7),
+    .sp-td:nth-child(8) {
+        display: none;
+    }
+}

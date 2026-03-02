@@ -8,6 +8,7 @@ import AboutPage from './pages/AboutPage'
 import ContactPage from './pages/ContactPage'
 import AdminPage from './pages/AdminPage'
 import MatchPage from './pages/MatchPage'
+import StandingsPage from './pages/StandingsPage'
 import './App.css'
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/highlights" element={<HighlightsPage />} />
           <Route path="/live" element={<LivePage />} />
+          <Route path="/standings" element={<StandingsPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/admin" element={<AdminPage />} />

@@ -51,6 +51,9 @@ export default function Navbar() {
                     <NavLink to="/live" className={({ isActive }) => `navbar__link navbar__link--live ${isActive ? 'active' : ''}`}>
                         🔴 Live
                     </NavLink>
+                    <NavLink to="/standings" className={({ isActive }) => `navbar__link ${isActive ? 'active' : ''}`}>
+                        Standings
+                    </NavLink>
                     <NavLink to="/about" className={({ isActive }) => `navbar__link ${isActive ? 'active' : ''}`}>
                         About
                     </NavLink>
@@ -89,6 +92,7 @@ export default function Navbar() {
                 <NavLink to="/" onClick={closeMenu} className={({ isActive }) => `navbar__mobile-link ${isActive ? 'active' : ''}`} end>Home</NavLink>
                 <NavLink to="/highlights" onClick={closeMenu} className={({ isActive }) => `navbar__mobile-link ${isActive ? 'active' : ''}`}>Highlights</NavLink>
                 <NavLink to="/live" onClick={closeMenu} className={({ isActive }) => `navbar__mobile-link navbar__mobile-link--live ${isActive ? 'active' : ''}`}>🔴 Live</NavLink>
+                <NavLink to="/standings" onClick={closeMenu} className={({ isActive }) => `navbar__mobile-link ${isActive ? 'active' : ''}`}>Standings</NavLink>
                 <NavLink to="/about" onClick={closeMenu} className={({ isActive }) => `navbar__mobile-link ${isActive ? 'active' : ''}`}>About</NavLink>
                 <NavLink to="/contact" onClick={closeMenu} className={({ isActive }) => `navbar__mobile-link ${isActive ? 'active' : ''}`}>Contact</NavLink>
                 <div className="navbar__mobile-socials">

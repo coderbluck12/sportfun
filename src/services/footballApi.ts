@@ -279,3 +279,42 @@ export async function getMatchById(token: string, matchId: string | number): Pro
 export async function getMatchH2H(token: string, matchId: string | number, limit = 10): Promise<FDH2HResponse> {
     return apiFetch<FDH2HResponse>(`/matches/${matchId}/head2head?limit=${limit}`, token)
 }
+
+// ── Standings types ────────────────────────────────────────────
+
+export interface FDStandingEntry {
+    position: number
+    team: FDTeam
+    playedGames: number
+    won: number
+    draw: number
+    lost: number
+    goalsFor: number
+    goalsAgainst: number
+    goalDifference: number
+    points: number
+    form: string | null
+}
+
+export interface FDStandingTable {
+    stage: string
+    type: 'TOTAL' | 'HOME' | 'AWAY'
+    group: string | null
+    table: FDStandingEntry[]
+}
+
+export interface FDStandingsResponse {
+    competition: FDCompetition
+    season: {
+        id: number
+        startDate: string
+        endDate: string
+        currentMatchday: number
+    }
+    standings: FDStandingTable[]
+}
+
+/** GET /v4/competitions/{code}/standings — current league table */
+export async function getStandings(token: string, code: string): Promise<FDStandingsResponse> {
+    return apiFetch<FDStandingsResponse>(`/competitions/${code}/standings`, token)
+}
